@@ -7,17 +7,6 @@
 
     <UserControl.Resources>
         <value_converters:BoolScaleConverter x:Key="boolScaleConverter" />
-        
-        <!-- Colors -->
-        <SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
-        <SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
-
-        <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="SecondaryTextColor" Color="#BBC1D1"/>
-        <SolidColorBrush x:Key="TertiaryTextColor" Color="Gray"/>
-
-        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
-        <SolidColorBrush x:Key="SecondaryGrayColor" Color="Gray"/>
 
         <!-- Start Styles-->
 
@@ -172,153 +161,79 @@
             <Image x:Name="imgNeutral" Source="{Binding NeutralImage, ElementName=uiPrelimSettings}" HorizontalAlignment="Right" Margin="50"/>
             <Image x:Name="imgFlexion" Source="{Binding FlexionImage, ElementName=uiPrelimSettings}" HorizontalAlignment="Right" Visibility="Collapsed" Margin="50"/>
             <Image x:Name="imgExtension" Source="{Binding ExtensionImage, ElementName=uiPrelimSettings}" HorizontalAlignment="Right" Visibility="Collapsed" Margin="50"/>
-
-            <Border Background="#E6000000" BorderThickness="5" CornerRadius="5" BorderBrush="{DynamicResource SecondaryGrayColor}" Panel.ZIndex="-1"/>
         </Grid>
 
+        <UserControls:EmbeddedDialog 
+            DialogTitle="Caution" 
+            DialogText="Please make sure your stop switch is enabled !" 
+            DialogWidth="240"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Grid.Column="2"/>
+
         <StackPanel Orientation="Vertical" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton x:Name="WristControl" Style="{DynamicResource ToggleButtonStyle}" Content="Wrist"
+                              Width="80" Height="30" Margin="0,0,10,3"/>
+                <ToggleButton x:Name="MCPControl" Style="{DynamicResource ToggleButtonStyle}" Content="MCP"
+                                Width="80" Height="30" Margin="10,0,0,3"/>
+            </StackPanel>
 
-            <TabControl x:Name="tabPreliminary" Width="235" Style="{DynamicResource TabControlStyle}" Grid.Row="0">
-                <TabItem x:Name="tabWrist" Header="Wrist" Style="{DynamicResource TabItemStyle}">
-                    <StackPanel Orientation="Vertical">
+            <TextBlock 
+                        Height="24" 
+                        Text="Neutral Position" 
+                        TextWrapping="Wrap" 
+                        FontWeight="Regular"
+                        Foreground="{DynamicResource PrimaryTextColor}"
+                        FontSize="16"
+                        Margin="10,5,5,0"/>
 
-                        <TextBlock Height="24" Text="Neutral Position" TextWrapping="Wrap" Foreground="{DynamicResource TertiaryTextColor}" FontSize="16" Margin="10,5,5,0"/>
-                        <Button 
-                                x:Name="setWristNeutral" 
-                                Content="Set zero" 
-                                GotFocus="setting_GotFocus" 
-                                Style="{DynamicResource GeneralButtonStyle}"
-                                Click="setNeutral_Click"
-                                Height="28" 
-                                FontSize="12"
-                                Margin="5,0,5,5"/>
-                        <UserControls:TextButton 
-                                x:Name="setWristFlexion"
-                                GotFocus="setting_GotFocus" 
-                                Caption="{Binding Path=FlexionName, ElementName=uiPrelimSettings, StringFormat={}Max {0}}"
-                                ButtonText="Measure" 
-                                ButtonClick="Measure_ButtonClick"/>
-                        <UserControls:TextButton
-                                x:Name="setWristExtension"
-                                GotFocus="setting_GotFocus"
-                                Caption="{Binding Path=ExtensionName, ElementName=uiPrelimSettings, StringFormat={}Max {0}}"
-                                ButtonText="Measure"
-                                ButtonClick="Measure_ButtonClick"/>
-                        <Border x:Name="wristExRangeBdr" BorderThickness="2" CornerRadius="5" Grid.Row="4" GotFocus="wristExRangeBdr_GotFocus" LostFocus="wristExRangeBdr_LostFocus">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Margin="10,5" Orientation="Vertical">
-                                    <TextBlock  Height="24" Text="Extra Range" TextWrapping="Wrap" Foreground="{DynamicResource TertiaryTextColor}" FontSize="16"/>
-                                    <StackPanel Orientation= "Horizontal">
-                                        <TextBox
-                                                x:Name="wristRange"
-                                                Height="28"
-                                                Width="100"
-                                                TextWrapping="Wrap"
-                                                Padding="10,0"
-                                                FontSize="16"
-                                                IsReadOnly="True"
-                                                VerticalContentAlignment="Center">
-                                            <TextBox.Resources>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Setter Property="CornerRadius" Value="5"/>
-                                                </Style>
-                                                <Style TargetType="{x:Type TextBox}">
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                </Style>
-                                            </TextBox.Resources>
-                                        </TextBox>
-                                    </StackPanel>
-                                </StackPanel>
-                                <UserControls:HorizontalScroller x:Name="wristRangeScroller" Height="28" VerticalAlignment="Bottom" Margin="5" ButtonMinClick="wristRangeScroller_ButtonMinClick" ButtonMaxClick="wristRangeScroller_ButtonMaxClick"/>
-                            </StackPanel>
+            <Button
+                        x:Name="setNeutral"
+                        Content="Set zero"
+                        GotFocus="setting_GotFocus"
+                        Click="btnSetNeutral_Click" 
+                        Height="36"
+                        FontSize="16"
+                        Margin="5,0,5,5">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#FF1039F2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Regular"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
 
-                        </Border>
-                    </StackPanel>
-                </TabItem>
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                <TabItem x:Name="tabMCP" Header="MCP" Style="{DynamicResource TabItemStyle}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock 
-                                Height="24" 
-                                Text="Neutral Position" 
-                                TextWrapping="Wrap" 
-                                Foreground="{DynamicResource TertiaryTextColor}"
-                                FontSize="16"
-                                Margin="10,5,5,0"/>
-                        <Button
-                                x:Name="setMCPNeutral"
-                                Content="Set zero"
-                                GotFocus="setting_GotFocus"
-                                Style="{DynamicResource GeneralButtonStyle}"
-                                Click="setNeutral_Click" 
-                                Height="28"
-                                FontSize="12"
-                                Margin="5,0,5,5"/>
-                        <UserControls:TextButton
-                                x:Name="setMCPFlexion"
-                                GotFocus="setting_GotFocus"
-                                Caption="Max Flexion"
-                                ButtonText="Measure"
-                                ButtonClick="Measure_ButtonClick"/>
-                        <UserControls:TextButton
-                                x:Name="setMCPExtension"
-                                Grid.Row="3" 
-                                GotFocus="setting_GotFocus"
-                                Caption="Max Extension" 
-                                ButtonText="Measure"
-                                ButtonClick="Measure_ButtonClick"/>
-                        <Border x:Name="mcpExRangeBdr" BorderThickness="2" CornerRadius="5" Grid.Row="4" GotFocus="mcpExRangeBdr_GotFocus" LostFocus="mcpExRangeBdr_LostFocus">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Margin="10,5">
-                                    <TextBlock  Height="24" Text="Extra Range" TextWrapping="Wrap" Foreground="{DynamicResource TertiaryTextColor}" FontSize="16"/>
-                                    <StackPanel Orientation= "Horizontal">
-                                        <TextBox
-                                                 x:Name="mcpRange"
-                                                 Height="28"
-                                                 Width="100"
-                                                 TextWrapping="Wrap"
-                                                 Padding="10,0"
-                                                 FontSize="16"
-                                                 IsReadOnly="True"
-                                                 VerticalContentAlignment="Center">
-                                            <TextBox.Resources>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Setter Property="CornerRadius" Value="5"/>
-                                                </Style>
-                                                <Style TargetType="{x:Type TextBox}">
-                                                    <Setter Property="BorderThickness" Value="0"/>
-                                                </Style>
-                                            </TextBox.Resources>
-                                        </TextBox>
-                                    </StackPanel>
-                                </StackPanel>
-                                <UserControls:HorizontalScroller x:Name="mcpRangeScroller" Height="28" VerticalAlignment="Bottom" Margin="5" ButtonMinClick="mcpRangeScroller_ButtonMinClick" ButtonMaxClick="mcpRangeScroller_ButtonMaxClick" />
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-
-            <Button x:Name="btnApplyGeneralSettings" Content="Set measures" Style="{DynamicResource GeneralButtonStyle}" Click="btnApplyGeneralSettings_Click" Height="50"/>
-
-            <Border Background="{DynamicResource PrimaryBlueColor}" Grid.Row="1" Height="50" Margin="0,10,0,0" CornerRadius="5,5,0,0">
-                <Grid>
-                    <TextBlock Text="Control Measures" Margin="10,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource PrimaryTextColor}"/>
-                </Grid>
-            </Border>
-
-            <Border Background="{DynamicResource SecondaryBlueColor}" Grid.Row="2" CornerRadius="0,0,5,5">
-                <Grid Margin="10,20">
-                    <TextBlock x:Name="txtDataInfo"
-                            FontSize="20" 
-                            TextWrapping="Wrap" 
-                            TextAlignment="Justify"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource TertiaryTextColor}"/>
-                </Grid>
-            </Border>
-
-            <UserControls:EmbeddedDialog DialogTitle="Caution" DialogText="Please make sure your stop switch is enabled !" Padding="0,20" Grid.Column="1" DialogWidth="235" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
         </StackPanel>
+
     </Grid>
 </UserControl>

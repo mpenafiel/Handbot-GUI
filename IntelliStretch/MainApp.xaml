@@ -108,7 +108,7 @@
             
             
             <!--Middle - Content-->
-            <Border Grid.Row="1" Background="Transparent">
+            <Border Grid.Row="1" Background="Transparent" Margin="20,20,0,20">
                 <Grid>
                     <TabControl x:Name="tabContent" Background="{x:Null}" Style="{StaticResource ContentTabStyle}" Visibility="Hidden" FocusVisualStyle="{x:Null}">
 
