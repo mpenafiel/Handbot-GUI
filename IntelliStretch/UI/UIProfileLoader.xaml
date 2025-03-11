@@ -258,7 +258,7 @@
                             Margin="0,10,0,30" Style="{DynamicResource TextBoxStyle}"
                             VerticalContentAlignment="Center">
                         </TextBox>
-                        <TextBlock Text="First Name:" FontSize="32" VerticalAlignment="Center" Foreground="{DynamicResource TertiaryTextColor}" />
+                        <TextBlock Text="First Name:" FontSize="32" VerticalAlignment="Center" Foreground="Black" />
                         <TextBox
                             x:Name="txtFirstName"
                             TextWrapping="Wrap"
