@@ -147,15 +147,21 @@
     </UserControl.Resources>
 
     <Grid>
-        <Border x:Name="bdrPopup" Background="{DynamicResource SecondaryBlueColor}" BorderBrush="Black" BorderThickness="0" CornerRadius="5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="496" Width="600">
+        <Border x:Name="bdrPopup" Background="#FFC8C8C8" BorderBrush="Black" BorderThickness="0" CornerRadius="5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="496" Width="600">
             <Grid x:Name="gridPopup">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Border CornerRadius="5,5,0,0" Background="{DynamicResource PrimaryBlueColor}">
-                    <TextBlock x:Name="txtTitle" Text="Select User:" Foreground="{DynamicResource PrimaryTextColor}" FontSize="32" Margin="20,10"/>
+                <Border CornerRadius="5,5,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0.0,0" EndPoint="0.0,1" Opacity="0.8">
+                            <GradientStop Color="#222222" Offset="0.5" />
+                            <GradientStop Color="#3b3b3b" Offset="1.5" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock x:Name="txtTitle" Text="Select User:" Foreground="#EEEEEEEE" FontSize="32" Margin="20,10"/>
                 </Border>
 
                 <Grid x:Name="gridProfileList" Grid.Row="1">
@@ -164,31 +170,93 @@
                         <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
 
-                    <ListBox x:Name="lstProfiles" Margin="10,20,10,0" Background="{DynamicResource SecondaryBlueColor}" FontSize="32" FontWeight="Bold" HorizontalContentAlignment="Stretch" BorderBrush="Transparent"/>
+                    <ListBox x:Name="lstProfiles" Margin="10,20,10,0" Background="#FFC8C8C8" FontSize="32" FontWeight="Bold" HorizontalContentAlignment="Stretch" BorderBrush="Transparent"/>
                     <UniformGrid Grid.Row="1" Columns="2">
-                        <Button x:Name="btnCreateNew" Content="Create New" Style="{DynamicResource GeneralButtonStyle2}" Width="180" Height="60" Click="btnCreateNew_Click"/>
-                        <Button x:Name="btnSelect" Content="Select" Style="{DynamicResource GeneralButtonStyle}" Width="180" Height="60" Click="btnSelect_Click"/>
+                        <Button x:Name="btnCreateNew" Height="60" Width="180" Content="Create new" FontSize="24" Click="btnCreateNew_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Yellow"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="1">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                    <Style.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5" />
+                                        </Style>
+                                    </Style.Resources>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="btnSelect" Height="60" Width="180" Content="Select" FontSize="24" Click="btnSelect_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="1">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                    <Style.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5" />
+                                        </Style>
+                                    </Style.Resources>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </UniformGrid>
                 </Grid>
 
                 <Grid x:Name="gridNewInput" Visibility="Collapsed" Grid.Row="1">
                     <StackPanel Margin="20">
-                        <TextBlock Text="Last Name:" FontSize="32" VerticalAlignment="Center" Foreground="{DynamicResource TertiaryTextColor}" />
+                        <TextBlock Text="Last Name:" FontSize="32" VerticalAlignment="Center" Foreground="Black" />
                         <TextBox
                             x:Name="txtLastName"
                             TextWrapping="Wrap"
                             Padding="10,0"
                             FontSize="32"
-                            Margin="0,10,0,30" Foreground="{DynamicResource TertiaryTextColor}"
+                            Margin="0,10,0,30" Style="{DynamicResource TextBoxStyle}"
                             VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="5"/>
-                                </Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                </Style>
-                            </TextBox.Resources>
                         </TextBox>
                         <TextBlock Text="First Name:" FontSize="32" VerticalAlignment="Center" Foreground="{DynamicResource TertiaryTextColor}" />
                         <TextBox
@@ -196,21 +264,82 @@
                             TextWrapping="Wrap"
                             Padding="10,0"
                             FontSize="32"
-                            Margin="0,10,0,30" Foreground="{DynamicResource TertiaryTextColor}"
+                            Margin="0,10,0,30" Style="{DynamicResource TextBoxStyle}"
                             VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="5"/>
-                                </Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                </Style>
-                            </TextBox.Resources>
                         </TextBox>
                         <UniformGrid Columns="2" VerticalAlignment="Bottom">
-                            <Button x:Name="btnCancelNew" Content="Cancel" VerticalAlignment="Bottom" Style="{DynamicResource GeneralButtonStyle2}" Width="180" Height="60" Click="btnCancelNew_Click" />
-                            
-                            <Button x:Name="btnNewProfile" Content="Create" Style="{DynamicResource GeneralButtonStyle}" Width="180" Height="60" Click="btnNewProfile_Click"/>
+                            <Button x:Name="btnCancelNew" Height="60" Width="180" Content="Cancel" FontSize="24" Click="btnCancelNew_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Regular"/>
+                                        <Setter Property="Padding" Value="5"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="1">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="Gray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="5" />
+                                            </Style>
+                                        </Style.Resources>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button x:Name="btnNewProfile" Height="60" Width="180" Content="Create" FontSize="24" Click="btnNewProfile_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Regular"/>
+                                        <Setter Property="Padding" Value="5"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="1">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="LightGray"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="Gray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="5" />
+                                            </Style>
+                                        </Style.Resources>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </UniformGrid>
                     </StackPanel>
                 </Grid>
@@ -226,7 +355,7 @@
                     <UserControls:ImageButton x:Name="btnWrist" Margin="60,0" BackColor="#90DDDDDD" Image="../images/Wrist_Stretching.png" ButtonCornerRadius="5" Text="Wrist" Width="150" Height="200" />
                     <UserControls:ImageButton x:Name="btnHand" Margin="60,0" BackColor="#90DDDDDD" Image="../images/Wrist_Stretching.png" ButtonCornerRadius="5" Text="Hand" Width="150" Height="200" />
                 </StackPanel>
-                <Border Margin="0,100,0,100" BorderBrush="{DynamicResource PrimaryBlueColor}" BorderThickness="1" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="80">
+                <Border Margin="0,100,0,100" BorderBrush="Yellow" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="80">
                     <UserControls:UserCheckBox x:Name="chkSaveJoint" Margin="5" BorderMargin="20,20,10,10" ImageMargin="10" CheckBorderThickness="2" Text="Remember my choice..." TextColor="Yellow" TextMargin="20,0" FontSize="28" />              
                 </Border>               
             </StackPanel>
