@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="IntelliStretch.UserControls.HorizontalRangeFinder"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Name="rangeFinder" LayoutUpdated="rangeFinder_LayoutUpdated">
+
+    <UserControl.Resources>
+        <!-- Colors -->
+        <SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
+        <SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
+
+        <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="SecondaryTextColor" Color="#BBC1D1"/>
+        <SolidColorBrush x:Key="TertiaryTextColor" Color="Gray"/>
+
+        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
+        <SolidColorBrush x:Key="SecondaryGrayColor" Color="Gray"/>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="2" x:Name="ShowBorder" Width="300" BorderThickness="0" Background="Transparent" CornerRadius="5" Visibility="Hidden" Height="40" VerticalAlignment="Top">
+                <TextBlock x:Name="ShowTextBlock" Grid.Row="2" TextWrapping="Wrap" Foreground="{DynamicResource TertiaryTextColor}" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center"/>
+            </Border>
+
+            <StackPanel Grid.Row="2" HorizontalAlignment="Left">
+            <TextBlock Foreground="{DynamicResource TertiaryTextColor}" FontSize="28" FontWeight="DemiBold">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} : {1}" >
+                        <Binding Path="ExtensionName" ElementName="rangeFinder"/>
+                        <Binding Path="PassiveExtMax" ElementName="rangeFinder"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+            <StackPanel Grid.Row="2" HorizontalAlignment="Right">
+                <TextBlock Foreground="{DynamicResource TertiaryTextColor}" FontSize="28" HorizontalAlignment="Right" FontWeight="DemiBold">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} : {1}" >
+                            <Binding Path="FlexionName" ElementName="rangeFinder"/>
+                            <Binding Path="PassiveFlexMax" ElementName="rangeFinder"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+
+            <Rectangle x:Name="rectPROM" Grid.Row="1" Stroke="Black" RadiusX="5" RadiusY="5" Margin="20,10">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.487,-0.528" StartPoint="0.487,1.215">
+                        <GradientStop Color="#b85f51" Offset="0"/>
+                        <GradientStop Color="#a45448" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Canvas Grid.Row="1" Margin="20,10">
+                <Rectangle x:Name="rectAROM" Width="0" Height="40" RadiusX="10" RadiusY="10" Stroke="Black" Fill="WhiteSmoke"/>
+                <Rectangle Grid.Row="1" x:Name="rectNeutral" Width="2" Height="60" Fill="Black"/>
+            </Canvas>
+            <Canvas Grid.Row="0" x:Name="cvsRange" VerticalAlignment="Bottom" Height="75">
+                <StackPanel x:Name="pnlAFlexMax">
+                    <TextBlock x:Name="txtActiveFlexionMax" Foreground="{DynamicResource SecondaryGrayColor}" FontSize="28" Margin="0,0,0,2" />
+                    <Polygon Points="0,0 15,30 30,0" Stroke="Black" Fill="{DynamicResource SecondaryGrayColor}"/>
+                </StackPanel>
+                <StackPanel x:Name="pnlAExtMax">
+                    <TextBlock x:Name="txtActiveExtensionMax" Foreground="{DynamicResource SecondaryGrayColor}" FontSize="28" Margin="0,0,0,2" />
+                    <Polygon Points="0,0 15,30 30,0" Stroke="Black" Fill="{DynamicResource SecondaryGrayColor}"/>
+                </StackPanel>
+                <StackPanel x:Name="pnlCurrentPos">
+                    <TextBlock x:Name="txtCurrentPos" Foreground="{DynamicResource SecondaryGrayColor}" FontSize="28" Margin="0,0,0,2" />
+                    <Polygon Points="0,0 15,30 30,0" Stroke="Black" Fill="{DynamicResource SecondaryGrayColor}"/>
+                </StackPanel>
+            </Canvas>
+        </Grid>
+    </Grid>
+</UserControl>

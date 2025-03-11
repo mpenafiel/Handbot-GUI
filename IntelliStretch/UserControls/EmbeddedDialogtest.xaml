@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="IntelliStretch.UI.EmbeddedDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IntelliStretch.UI"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <!-- Colors -->
+        <SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
+        <SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
+
+        <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="SecondaryTextColor" Color="#BBC1D1"/>
+        <SolidColorBrush x:Key="TertiaryTextColor" Color="Gray"/>
+
+        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
+        <SolidColorBrush x:Key="SecondaryGrayColor" Color="Gray"/>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical">
+        <Border Background="{DynamicResource PrimaryBlueColor}" Grid.Row="1" Height="50" CornerRadius="10,10,0,0">
+            <Grid>
+                <TextBlock Text="{Binding DialogTitle}" Margin="10,0" Padding="10,20" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource PrimaryTextColor}"/>
+            </Grid>
+        </Border>
+
+        <Border Background="{DynamicResource  PrimaryTextColor}" Grid.Row="1" CornerRadius="0,0,10,10" Width="{Binding DialogWidth}" Padding="20">
+            <Grid>
+                <TextBlock Text="{Binding DialogText}" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource TertiaryTextColor}"/>
+            </Grid>
+        </Border>
+    </StackPanel>
+</UserControl>
