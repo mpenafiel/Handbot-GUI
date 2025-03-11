@@ -398,5 +398,39 @@ namespace IntelliStretch.UI
         }
 
         #endregion
+
+        private void exRangeBdr_GotFocus(object sender, RoutedEventArgs e)
+        {
+            sliderValuePicker.Visibility = Visibility.Hidden;
+            exRangeBdr.BorderBrush = new SolidColorBrush(Colors.Yellow);
+            Update_JointImage(imgNeutral);
+        }
+
+        private void exRangeBdr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            sliderValuePicker.Visibility = Visibility.Visible;
+            exRangeBdr.BorderBrush = null;
+        }
+
+        private void MCPControl_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void JointControl_Click(object sender, RoutedEventArgs e)
+        {
+            if (e.Source == WristControl)
+            {
+                Console.WriteLine("Wrist clicked");
+                WristControl.IsChecked = true;
+                MCPControl.IsChecked = false;
+            }
+            else if (e.Source == MCPControl)
+            {
+                Console.WriteLine("MCP Clicked");
+                WristControl.IsChecked = false;
+                MCPControl.IsChecked = true;
+            }
+        }
     }
 }

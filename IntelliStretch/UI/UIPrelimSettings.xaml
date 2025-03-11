@@ -174,9 +174,9 @@
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
                 <ToggleButton x:Name="WristControl" Style="{DynamicResource ToggleButtonStyle}" Content="Wrist"
-                              Width="80" Height="30" Margin="0,0,10,3"/>
+                              Width="80" Height="30" Margin="0,0,10,3" Click="JointControl_Click"/>
                 <ToggleButton x:Name="MCPControl" Style="{DynamicResource ToggleButtonStyle}" Content="MCP"
-                                Width="80" Height="30" Margin="10,0,0,3"/>
+                                Width="80" Height="30" Margin="10,0,0,3" Click="JointControl_Click"/>
             </StackPanel>
 
             <TextBlock 
@@ -192,7 +192,6 @@
                         x:Name="setNeutral"
                         Content="Set zero"
                         GotFocus="setting_GotFocus"
-                        Click="btnSetNeutral_Click" 
                         Height="36"
                         FontSize="16"
                         Margin="5,0,5,5">
@@ -232,6 +231,67 @@
                     </Style>
                 </Button.Style>
             </Button>
+
+            <UserControls:FlatTextButton x:Name="setFlexion" FontWeight="Medium" Caption="{Binding FlexionName, ElementName=uiPrelimSettings, StringFormat=Max {0}:}" ButtonText="Measure" GotFocus="setting_GotFocus" ButtonClick="Measure_ButtonClick"/>
+
+            <UserControls:FlatTextButton x:Name="setExtension" FontWeight="Medium" Caption="{Binding ExtensionName, ElementName=uiPrelimSettings, StringFormat=Max {0}:}" Margin="0,5" 
+                         ButtonText="Measure" GotFocus="setting_GotFocus" ButtonClick="Measure_ButtonClick"/>
+
+            <Border x:Name="exRangeBdr" BorderThickness="2" CornerRadius="5" GotFocus="exRangeBdr_GotFocus" LostFocus="exRangeBdr_LostFocus">
+                <StackPanel Margin="10,5">
+                    <TextBlock  Height="24" Text="Extra Range" TextWrapping="Wrap" Foreground="{DynamicResource PrimaryTextColor}" FontSize="16" FontWeight="Regular"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="200">
+                        <TextBox x:Name="setExRange" Height="28" Width="100" Style="{DynamicResource TextBoxStyle}" Margin="0,0,20,0"/>
+                        <UserControls:HorizontalScroller HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Button x:Name="btnApplyGeneralSettings" Content="Set" Height="50" Margin="0,25,0,0" 
+                    HorizontalAlignment="Stretch" Click="btnApplyGeneralSettings_Click" FontSize="24">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Red"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Regular"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <UserControls:EmbeddedDialog
+                Margin="0,25"
+                x:Name="txtDataInfo"
+                DialogTitle="Control Feedback"
+                DialogWidth="240"/>
+
 
         </StackPanel>
 

@@ -313,7 +313,8 @@
     <!-- Start: TextBox Style -->
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Black"/>
 
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
