@@ -22,7 +22,7 @@ namespace IntelliStretch.UI
         Protocols.WristSettings wristSettings;
         Protocols.MCPSettings mcpSettings;
         Image currentJoinImage;
-        UserControls.TextButton currentTxtButton;
+        UserControls.FlatTextButton currentTxtButton;
         bool IsMeasuring;
         
         #endregion
@@ -136,10 +136,10 @@ namespace IntelliStretch.UI
             mcpSettings = mainApp.IntelliProtocol.MCP;
 
             // Wrist settings
-           // setWristFlexion.TextBoxText = wristSettings.FlexionMax.ToString();
-           // if (generalSettings.ExtensionMax > 0) setWristExtension.TextBoxText = wristSettings.ExtensionMax.ToString();
-           // else setWristExtension.TextBoxText = (-wristSettings.ExtensionMax).ToString();
-           // wristRange.Text = generalSettings.ExtraRange.ToString();
+            setFlexion.TextBoxText = wristSettings.FlexionMax.ToString();
+            if (generalSettings.ExtensionMax > 0) setExtension.TextBoxText = wristSettings.ExtensionMax.ToString();
+            else setExtension.TextBoxText = (-wristSettings.ExtensionMax).ToString();
+            setExRange.Text = generalSettings.ExtraRange.ToString();
 
             // MCP Settings
             //setMCPFlexion.TextBoxText = mcpSettings.FlexionMax.ToString();
@@ -152,12 +152,12 @@ namespace IntelliStretch.UI
 
         public void Update_DataInfo(IntelliSerialPort.AnkleData newAnkleData)
         {
-            //txtDataInfo.Dispatcher.Invoke(new Action(delegate
-          //  {
-                //txtDataInfo.Content = "Position (deg): " + newAnkleData.anklePos.ToString("#0.0")
-             //                   + "\r\nTorque (Nm): " + newAnkleData.ankleTorque.ToString("#0.0")
-           //                     + "\r\nCurrent Level: " + (newAnkleData.ankleAm * 100).ToString() + "%";
-         //   }));
+            txtDataInfo.Dispatcher.Invoke(new Action(delegate
+            {
+                txtDataInfo.Content = "Position (deg): " + newAnkleData.anklePos.ToString("#0.0")
+                                + "\r\nTorque (Nm): " + newAnkleData.ankleTorque.ToString("#0.0")
+                                + "\r\nCurrent Level: " + (newAnkleData.ankleAm * 100).ToString() + "%";
+            }));
 
             if (IsMeasuring && currentTxtButton != null)
             {
@@ -248,24 +248,24 @@ namespace IntelliStretch.UI
 
         
         private void setting_GotFocus(object sender, RoutedEventArgs e)
-        {/*
-            if (e.Source == setWristFlexion || e.Source == setMCPFlexion)
+        {
+            if (e.Source == setFlexion)
             {
                 Update_JointImage(imgFlexion);
-                currentTxtButton = setWristFlexion;
+                currentTxtButton = setFlexion;
                 Update_SliderPicker(0, 100, 5, Convert.ToInt32(currentTxtButton.TextBoxText));// Chang Max. ROM from 90degree to 40 degree April.2013       
             }
-            else if (e.Source == setWristExtension || e.Source == setMCPExtension)
+            else if (e.Source == setExtension)
             {
                 Update_JointImage(imgExtension);
-                currentTxtButton = setWristExtension;
+                currentTxtButton = setExtension;
                 Update_SliderPicker(0, 100, 5, Convert.ToInt32(currentTxtButton.TextBoxText));// Chang Max. ROM from 60degree to 30 degree April.2013          
             }
             else
             {
                 Update_JointImage(imgNeutral);
                 currentTxtButton = null;
-            }*/
+            }
         }
 
         private void Update_JointImage(Image newImage)
@@ -299,7 +299,7 @@ namespace IntelliStretch.UI
 
         private void Measure_ButtonClick(object sender, RoutedEventArgs e)
         {
-            currentTxtButton = e.Source as UserControls.TextButton;
+            currentTxtButton = e.Source as UserControls.FlatTextButton;
             IsMeasuring = true;
         }
 

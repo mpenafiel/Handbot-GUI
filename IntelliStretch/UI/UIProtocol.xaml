@@ -21,7 +21,7 @@
     </UserControl.Resources>
 
     <Grid Background="#C2222222">
-        <Border x:Name="bdrProtocol" Background="#C2222222" BorderBrush="Black" BorderThickness="1" CornerRadius="5" 
+        <Border x:Name="bdrProtocol" Background="#C2222222" BorderBrush="Black" BorderThickness="0" CornerRadius="5" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="840">
             <Border.RenderTransform>
                 <TranslateTransform/>

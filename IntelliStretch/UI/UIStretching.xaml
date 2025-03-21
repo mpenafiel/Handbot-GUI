@@ -133,7 +133,7 @@
 
         <Border VerticalAlignment="Bottom" Width="160" BorderBrush="Blue" BorderThickness="1" HorizontalAlignment="Left" CornerRadius="10">
             <StackPanel>
-                <UserControls:ColorToggleButton x:Name="btnStretchMode" Margin="24,20" Height="44" Color="Yellow" TopColor="IndianRed" ButtonCornerRadius="22" Text="Intelligent" Click="btnStretchMode_Click" Visibility="{Binding ModeSelectionVisibility, ElementName=uiStretching}"/>
+                <UserControls:ColorToggleButton x:Name="btnStretchMode" Margin="24,20" Height="44" Color="Red" TopColor="Yellow" ButtonCornerRadius="5" Text="Intelligent" Click="btnStretchMode_Click" Visibility="Visible"/>
                 <Button x:Name="btnDefaultStretch" Style="{DynamicResource GeneralButtonStyle}" Content="Default" Width="150" Click="btnDefaultStretch_Click" Margin="5"/>
                 
                 
