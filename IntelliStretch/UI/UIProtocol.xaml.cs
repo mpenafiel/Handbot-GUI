@@ -215,8 +215,8 @@ namespace IntelliStretch.UI
             cboCtrlDirection.SelectedIndex = (protocol.ResistiveMode.ControlDirection == Protocols.Direction.Horizontal) ? 0 : 1;
             chkNoLoading.IsChecked = protocol.ResistiveMode.IsNoLoading;
             sliderRessistScale.Value = protocol.ResistiveMode.ScalingFactor;
-            sliderResistFlex.Value = protocol.ResistiveMode.FlexionResistance;
-            sliderResistExt.Value = protocol.ResistiveMode.ExtensionResistance;
+            //sliderResistFlex.Value = protocol.ResistiveMode.FlexionResistance;
+            //sliderResistExt.Value = protocol.ResistiveMode.ExtensionResistance;
         }
 
         private void Accept_General()
@@ -360,8 +360,8 @@ namespace IntelliStretch.UI
             protocol.ControlDirection = (cboCtrlDirection.SelectedIndex == 0) ? Protocols.Direction.Horizontal : Protocols.Direction.Vertical;
             protocol.IsNoLoading = (bool)chkNoLoading.IsChecked;
             protocol.ScalingFactor = (float)sliderRessistScale.Value;
-            protocol.FlexionResistance = (int)sliderResistFlex.Value;
-            protocol.ExtensionResistance = (int)sliderResistExt.Value;
+            //protocol.FlexionResistance = (int)sliderResistFlex.Value;
+            //protocol.ExtensionResistance = (int)sliderResistExt.Value;
         }
 
         private void btnSaveDefault_Click(object sender, RoutedEventArgs e)
@@ -394,12 +394,6 @@ namespace IntelliStretch.UI
         private void Resume_CurrentGame()
         {
             mainApp.uiGames.ResumeGame();
-        }
-
-        private void tgBtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            ellipseSaveing.Fill = ((bool)tgBtnSave.IsChecked) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-
         }
 
     }

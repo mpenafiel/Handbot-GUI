@@ -22,7 +22,7 @@ namespace IntelliStretch.UI
         Protocols.WristSettings wristSettings;
         Protocols.MCPSettings mcpSettings;
         Image currentJoinImage;
-        UserControls.TextButton currentTxtButton;
+        UserControls.FlatTextButton currentTxtButton;
         bool IsMeasuring;
         
         #endregion
@@ -136,16 +136,16 @@ namespace IntelliStretch.UI
             mcpSettings = mainApp.IntelliProtocol.MCP;
 
             // Wrist settings
-            setWristFlexion.TextBoxText = wristSettings.FlexionMax.ToString();
-            if (generalSettings.ExtensionMax > 0) setWristExtension.TextBoxText = wristSettings.ExtensionMax.ToString();
-            else setWristExtension.TextBoxText = (-wristSettings.ExtensionMax).ToString();
-            wristRange.Text = generalSettings.ExtraRange.ToString();
+            setFlexion.TextBoxText = wristSettings.FlexionMax.ToString();
+            if (generalSettings.ExtensionMax > 0) setExtension.TextBoxText = wristSettings.ExtensionMax.ToString();
+            else setExtension.TextBoxText = (-wristSettings.ExtensionMax).ToString();
+            setExRange.Text = generalSettings.ExtraRange.ToString();
 
             // MCP Settings
-            setMCPFlexion.TextBoxText = mcpSettings.FlexionMax.ToString();
-            if (generalSettings.ExtensionMax > 0) setMCPExtension.TextBoxText = mcpSettings.ExtensionMax.ToString();
-            else setMCPExtension.TextBoxText = (-mcpSettings.ExtensionMax).ToString();
-            mcpRange.Text = generalSettings.ExtraRange.ToString();
+            //setMCPFlexion.TextBoxText = mcpSettings.FlexionMax.ToString();
+            //if (generalSettings.ExtensionMax > 0) setMCPExtension.TextBoxText = mcpSettings.ExtensionMax.ToString();
+            //else setMCPExtension.TextBoxText = (-mcpSettings.ExtensionMax).ToString();
+            //mcpRange.Text = generalSettings.ExtraRange.ToString();
 
             this.IsReflected = (generalSettings.JointSide == Protocols.JointSide.Left); // Reflect display images if left arm side is selected, right arm and ankle remain unchanged
         }
@@ -154,7 +154,7 @@ namespace IntelliStretch.UI
         {
             txtDataInfo.Dispatcher.Invoke(new Action(delegate
             {
-                txtDataInfo.Text = "Position (deg): " + newAnkleData.anklePos.ToString("#0.0")
+                txtDataInfo.Content = "Position (deg): " + newAnkleData.anklePos.ToString("#0.0")
                                 + "\r\nTorque (Nm): " + newAnkleData.ankleTorque.ToString("#0.0")
                                 + "\r\nCurrent Level: " + (newAnkleData.ankleAm * 100).ToString() + "%";
             }));
@@ -173,10 +173,11 @@ namespace IntelliStretch.UI
 
         private void btnApplyGeneralSettings_Click(object sender, RoutedEventArgs e)
         {
+            /*
             switch ((tabPreliminary.SelectedItem as TabItem).Name)
             {
                 case "tabWrist":
-                    Console.WriteLine("Sending Wrist Settings");
+                   Console.WriteLine("Sending Wrist Settings");
                     //Update wrist settings
                     int newWristFlexion = Convert.ToInt32(setWristFlexion.TextBoxText);
                     int newWristExtension = Convert.ToInt32(setWristExtension.TextBoxText);
@@ -239,7 +240,7 @@ namespace IntelliStretch.UI
 
                 default:
                     break;
-            }
+            }*/
 
             // Raise Done event
             RaiseEvent(new RoutedEventArgs(Settings_DoneEvent)); 
@@ -248,16 +249,16 @@ namespace IntelliStretch.UI
         
         private void setting_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (e.Source == setWristFlexion || e.Source == setMCPFlexion)
+            if (e.Source == setFlexion)
             {
                 Update_JointImage(imgFlexion);
-                currentTxtButton = setWristFlexion;
+                currentTxtButton = setFlexion;
                 Update_SliderPicker(0, 100, 5, Convert.ToInt32(currentTxtButton.TextBoxText));// Chang Max. ROM from 90degree to 40 degree April.2013       
             }
-            else if (e.Source == setWristExtension || e.Source == setMCPExtension)
+            else if (e.Source == setExtension)
             {
                 Update_JointImage(imgExtension);
-                currentTxtButton = setWristExtension;
+                currentTxtButton = setExtension;
                 Update_SliderPicker(0, 100, 5, Convert.ToInt32(currentTxtButton.TextBoxText));// Chang Max. ROM from 60degree to 30 degree April.2013          
             }
             else
@@ -298,7 +299,7 @@ namespace IntelliStretch.UI
 
         private void Measure_ButtonClick(object sender, RoutedEventArgs e)
         {
-            currentTxtButton = e.Source as UserControls.TextButton;
+            currentTxtButton = e.Source as UserControls.FlatTextButton;
             IsMeasuring = true;
         }
 
@@ -336,7 +337,7 @@ namespace IntelliStretch.UI
         #region Range Scroller Focus Functions
         private void wristExRangeBdr_GotFocus(object sender, RoutedEventArgs e)
         {
-            wristExRangeBdr.BorderBrush = new SolidColorBrush(Colors.Red);
+            //wristExRangeBdr.BorderBrush = new SolidColorBrush(Colors.Red);
 
             Update_JointImage(imgNeutral);
             sliderValuePicker.Visibility = Visibility.Hidden;
@@ -344,20 +345,20 @@ namespace IntelliStretch.UI
 
         private void wristExRangeBdr_LostFocus(object sender, RoutedEventArgs e)
         {
-            wristExRangeBdr.BorderBrush = null;
+            //wristExRangeBdr.BorderBrush = null;
             sliderValuePicker.Visibility = Visibility.Visible;
         }
 
         private void mcpExRangeBdr_GotFocus(object sender, RoutedEventArgs e)
         {
-            mcpExRangeBdr.BorderBrush = new SolidColorBrush(Colors.Red);
+            //mcpExRangeBdr.BorderBrush = new SolidColorBrush(Colors.Red);
             Update_JointImage(imgNeutral);
             sliderValuePicker.Visibility = Visibility.Hidden;
         }
 
         private void mcpExRangeBdr_LostFocus(object sender, RoutedEventArgs e)
         {
-            mcpExRangeBdr.BorderBrush = null;
+            //mcpExRangeBdr.BorderBrush = null;
             sliderValuePicker.Visibility = Visibility.Visible;
         }
 
@@ -366,36 +367,70 @@ namespace IntelliStretch.UI
         #region Range Scroller Functions
         private void mcpRangeScroller_ButtonMinClick(object sender, RoutedEventArgs e)
         {
-            int range_val = Int32.Parse(mcpRange.Text);
+            //int range_val = Int32.Parse(mcpRange.Text);
 
-            if (range_val > 0) range_val = range_val - 1;
-            mcpRange.Text = range_val.ToString();
+            //if (range_val > 0) range_val = range_val - 1;
+            //mcpRange.Text = range_val.ToString();
         }
 
         private void mcpRangeScroller_ButtonMaxClick(object sender, RoutedEventArgs e)
         {
-            int range_val = Int32.Parse(mcpRange.Text);
+            //int range_val = Int32.Parse(mcpRange.Text);
 
-            if (range_val < 5) range_val++;
-            mcpRange.Text = range_val.ToString();
+            //if (range_val < 5) range_val++;
+           // mcpRange.Text = range_val.ToString();
         }
 
         private void wristRangeScroller_ButtonMinClick(object sender, RoutedEventArgs e)
         {
-            int range_val = Int32.Parse(wristRange.Text);
+            //int range_val = Int32.Parse(wristRange.Text);
 
-            if (range_val > 0) range_val = range_val - 1;
-            wristRange.Text = range_val.ToString();
+           // if (range_val > 0) range_val = range_val - 1;
+            //wristRange.Text = range_val.ToString();
         }
 
         private void wristRangeScroller_ButtonMaxClick(object sender, RoutedEventArgs e)
         {
-            int range_val = Int32.Parse(wristRange.Text);
+            //int range_val = Int32.Parse(wristRange.Text);
 
-            if (range_val < 5) range_val++;
-            wristRange.Text = range_val.ToString();
+           // if (range_val < 5) range_val++;
+           // wristRange.Text = range_val.ToString();
         }
 
         #endregion
+
+        private void exRangeBdr_GotFocus(object sender, RoutedEventArgs e)
+        {
+            sliderValuePicker.Visibility = Visibility.Hidden;
+            exRangeBdr.BorderBrush = new SolidColorBrush(Colors.Yellow);
+            Update_JointImage(imgNeutral);
+        }
+
+        private void exRangeBdr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            sliderValuePicker.Visibility = Visibility.Visible;
+            exRangeBdr.BorderBrush = null;
+        }
+
+        private void MCPControl_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void JointControl_Click(object sender, RoutedEventArgs e)
+        {
+            if (e.Source == WristControl)
+            {
+                Console.WriteLine("Wrist clicked");
+                WristControl.IsChecked = true;
+                MCPControl.IsChecked = false;
+            }
+            else if (e.Source == MCPControl)
+            {
+                Console.WriteLine("MCP Clicked");
+                WristControl.IsChecked = false;
+                MCPControl.IsChecked = true;
+            }
+        }
     }
 }

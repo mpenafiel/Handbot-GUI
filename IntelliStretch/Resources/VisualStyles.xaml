@@ -18,7 +18,7 @@
         <GradientBrush.GradientStops>
             <GradientStopCollection>
                 <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#348EF6" Offset="1.0"/>
+                <GradientStop Color="Green" Offset="1.0"/>
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
@@ -151,12 +151,12 @@
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Ellipse 
                             Name="Ellipse" 
-                            Fill="{StaticResource PrimaryBlueColor}"
+                            Fill="Green"
                             Stroke="{StaticResource NormalBorderBrush}"
                             StrokeThickness="0" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource PrimaryGrayColor}"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource DarkBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource DisabledBackgroundBrush}"/>
@@ -308,7 +308,110 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!-- Start: TextBox Style -->
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <!-- End: TextBox Style -->
     
+    <!-- Start: Togglebutton with radio style effect-->
+    <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="Yellow"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+            </Trigger>
+        </Style.Triggers>
+
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <!-- Start: TabItem Styles -->
+    <Style x:Key="TabItemStyle" TargetType="TabItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Margin" Value="0 0 3 2"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid SnapsToDevicePixels="True">
+                        <Border CornerRadius="5"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Margin="{TemplateBinding Margin}"/>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          SnapsToDevicePixels="True"
+                                          RecognizesAccessKey="True"
+                                          Margin="{TemplateBinding Padding}"
+                                          ContentSource="Header"
+                                          Focusable="False"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background"
+                                    Value="LightGray"/>
+                            <Setter Property="Foreground"
+                                    Value="Black"/>
+
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background"
+                                    Value="Yellow"/>
+                            <Setter Property="Foreground"
+                                    Value="Black"/>
+                            <Setter Property="BorderBrush"
+                                    Value="Black"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- End: TabItem Styles -->
+
 
     <!-- Tabcontrol styles-->
     <Style x:Key="ContentTabStyle" TargetType="{x:Type TabControl}">

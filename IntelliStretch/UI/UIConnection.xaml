@@ -3,20 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:UserControls="clr-namespace:IntelliStretch.UserControls"
     Name="uiConnection">
-
-    <UserControl.Resources>
-        <!-- Colors -->
-        <SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
-        <SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
-
-        <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="SecondaryTextColor" Color="#BBC1D1"/>
-        <SolidColorBrush x:Key="TertiaryTextColor" Color="Gray"/>
-
-        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
-        <SolidColorBrush x:Key="SecondaryGrayColor" Color="Gray"/>
-
-    </UserControl.Resources>
+    
     <Grid Margin="80,0,80,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,9 +17,143 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3">
-            <UserControls:FlatToggleButton x:Name="BtnWristConnect" Width="150" Height="50" Margin="0,0 25,0" FontSize="24" Text="Wrist" Click="JointConnect_Click" IsChecked="True"/>
-            <UserControls:FlatToggleButton Text="MCP" Margin="25,0" Width="150" Height="50" FontSize="24" x:Name="BtnMCPConnect" Click="JointConnect_Click"/>
-            <UserControls:FlatToggleButton Text="Dual" Margin="25,0,0,0" Width="150" Height="50" FontSize="24" x:Name="BtnDualConnect" Click="JointConnect_Click"/>
+            <ToggleButton 
+                x:Name="BtnWristConnect"
+                Content="Wrist"
+                FontSize="20"
+                Height="50"
+                Width="150"
+                Click="JointConnect_Click"
+                Margin="0,0 25,0">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+
+            <ToggleButton 
+                x:Name="BtnMCPConnect"
+                Content="MCP"
+                FontSize="20"
+                Height="50"
+                Width="150"
+                Click="JointConnect_Click"
+                Margin="25,0">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+
+            <ToggleButton 
+                x:Name="BtnDualConnect"
+                Content="Dual"
+                FontSize="20"
+                Height="50"
+                Width="150"
+                Click="JointConnect_Click"
+                Margin="25,0,0,0">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
         </StackPanel>
         
         
@@ -41,11 +162,27 @@
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
 
             <Grid>
-                <UserControls:ImageButton x:Name="btnConnect" Image="../images/Connect.png" ImageMargin="20" ButtonCornerRadius="5" BackColor="{DynamicResource PrimaryGrayColor}" Text="Connect" Width="135" Height="175" Click="btnConnect_Click"/>
-                <UserControls:ImageButton x:Name="btnStart" Image="../images/Start.png" ImageMargin="20" ButtonCornerRadius="5" BackColor="{DynamicResource PrimaryGrayColor}" Text="Start" Width="135" Height="175" Visibility="Collapsed" Click="btnStart_Click"/>
+                <UserControls:ImageButton
+                    x:Name="btnConnect"
+                    Image="../images/Connect.png" 
+                    ImageMargin="20" 
+                    ButtonCornerRadius="5"
+                    Text="Connect" 
+                    Width="135" 
+                    Height="175" 
+                    Click="btnConnect_Click"/>
+                <UserControls:ImageButton
+                    x:Name="btnStart"
+                    Image="../images/Start.png"
+                    ImageMargin="20"
+                    ButtonCornerRadius="5"
+                    Text="Start" Width="135" 
+                    Height="175" 
+                    Visibility="Collapsed" 
+                    Click="btnStart_Click"/>
                 <UserControls:WaitingControl x:Name="waitAnimation" Visibility="Collapsed" />
             </Grid>
-            <TextBlock Height="43" Margin="0,20,0,0" Name="txtStatus" Foreground="{DynamicResource SecondaryGrayColor}" TextAlignment="Center" FontSize="24" FontWeight="Bold"/>
+            <TextBlock Height="43" Margin="0,20,0,0" Name="txtStatus" Foreground="{DynamicResource PrimaryTextColor}" TextAlignment="Center" FontSize="24"/>
         </StackPanel>
     </Grid>
 </UserControl>
